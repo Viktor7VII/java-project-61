@@ -22,3 +22,7 @@ tasks.test {
 application {
     mainClass.set("hexlet.code.App")  // Указываем точку входа в приложение
 }
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
