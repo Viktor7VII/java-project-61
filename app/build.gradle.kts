@@ -1,28 +1,33 @@
 plugins {
-    id("java")
-    application
+    id 'java'
+    id 'application'
+    id 'checkstyle'
 }
 
-group = "hexlet.code"
-version = "1.0-SNAPSHOT"
+group 'hexlet.code'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-}
-
-tasks.test {
-    useJUnitPlatform()
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 application {
-    mainClass.set("hexlet.code.App")  // Указываем точку входа в приложение
+    mainClass = 'hexlet.code.App'
 }
 
-tasks.named<JavaExec>("run") {
-    standardInput = System.`in`
+test {
+    useJUnitPlatform()
+}
+
+compileJava {
+    options.release = 20
+}
+
+run {
+    standardInput(System.in)
 }
